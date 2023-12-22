@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+if __name__ == "__main__":
+    from prime_fac_func import prime_func
+    import sys
+
+    if len(sys.argv) != 2:
+        print("Error")
+        sys.exit(1)
+
+    arg = sys.argv[1]
+
+    try:
+        with open (arg, "r") as f:
+            lines = f.readlines()
+    except FileNotFoundError:
+        print(f"{arg} not found")
+    except PermissionError:
+        print("you don't the permission to open the file")
+    except Exception as err:
+        print(f"unknown error: {err}")
+    finally:
+        for line in lines:
+            num = int(line.strip())
+            prime_func(num)

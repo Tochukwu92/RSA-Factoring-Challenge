@@ -16,12 +16,15 @@ if __name__ == "__main__":
             lines = f.readlines()
     except FileNotFoundError:
         print(arg + " file not found")
-        sys.exit(1)
-
-    for line in lines:
-        num = int(line.strip())
-        factoring(num)
-    if time.time() - start_time > 5:
-        print("Time limit exceeded")
+    except PermissionError:
+        print("permission denied")
+    except Exception as err:
+        print(f"unknown Error: {err}")
+    finally:
+        for line in lines:
+            num = int(line.strip())
+            factoring(num)
+        if time.time() - start_time > 5:
+            print("Time limit exceeded")
 
 
